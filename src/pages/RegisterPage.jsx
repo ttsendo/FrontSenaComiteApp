@@ -198,6 +198,7 @@ const RegisterPage = () => {
 
         {/* Validación de Contraseña */}
         <label>Contraseña:</label>
+        
         <input
             type="password"
             name="contrasena"
