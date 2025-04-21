@@ -21,6 +21,7 @@ const RegisterPage = () => {
     departamento_residencia: "",
     municipio_residencia: "",
     contrasena: "",
+    contrasena_confirmada: "",
     numero_ficha: "",
     programa: "",
     tipo_formacion: "",
@@ -42,7 +43,7 @@ const RegisterPage = () => {
       "nombre_completo", "correo_personal", "correo_sena",
       "tipo_documento", "numero_documento", "telefono",
       "direccion", "pais_residencia", "departamento_residencia",
-      "municipio_residencia", "contrasena"
+      "municipio_residencia", "contrasena", "contrasena_confirmada"
     ];
     
     for (const campo of camposUsuario) {
@@ -50,6 +51,27 @@ const RegisterPage = () => {
         alert(`El campo ${campo} es obligatorio`);
         return;
       }
+    }
+
+    // Validar que la contraseña y su confirmación coincidan
+    if (usuarioData.contrasena !== usuarioData.contrasena_confirmada) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+
+    // Validar correo personal
+    const correo = formData.correo_personal.trim().toLowerCase();
+    const dominiosValidos = ["gmail.com", "hotmail.com", "outlook.com", "yahoo.com"];
+
+    if (!correo.includes("@")) {
+      alert("El correo personal debe contener '@'");
+      return;
+    }
+
+    const dominioCorreo = correo.split("@")[1];
+    if (!dominiosValidos.includes(dominioCorreo)) {
+      alert("El correo personal debe ser de un dominio válido: gmail, hotmail, outlook o yahoo");
+      return;
     }
 
     // Validaciones específicas por rol
@@ -145,12 +167,71 @@ const RegisterPage = () => {
         <label>Dirección:</label>
         <input type="text" name="direccion" value={formData.direccion} onChange={handleChange} required />
 
+        <label>Correo Personal:</label>
+        <input
+            type="email"
+            name="correo_personal"
+            value={formData.correo_personal}
+            onChange={handleChange}
+            required
+        />
+
+        <label>Correo SENA:</label>
+        <input
+            type="email"
+            name="correo_sena"
+            value={formData.correo_sena}
+            onChange={handleChange}
+            required
+        />
+
+        <label>Tipo de Documento:</label>
+        <select name="tipo_documento" value={formData.tipo_documento} onChange={handleChange} required>
+          <option value="">Seleccione</option>
+          <option value="CC">Cédula de Ciudadanía</option>
+          <option value="TI">Tarjeta de Identidad</option>
+          <option value="CE">Cédula de Extranjería</option>
+        </select>
+
+        <label>Número de Documento:</label>
+        <input type="text" name="numero_documento" value={formData.numero_documento} onChange={handleChange} required />
+
+        {/* Validación de Contraseña */}
+        <label>Contraseña:</label>
+        <input
+            type="password"
+            name="contrasena"
+            value={formData.contrasena}
+            onChange={handleChange}
+            required
+        />
+        
+        <label>Confirmar Contraseña:</label>
+        <input
+            type="password"
+            name="contrasena_confirmada"
+            value={formData.contrasena_confirmada}
+            onChange={handleChange}
+            required
+        />
+
         {/* Select de Departamento y Municipio */}
         <Select label="Departamento" name="departamento_residencia" options={Object.keys(municipios)} value={formData.departamento_residencia} onChange={handleChange} />
         <Select label="Municipio" name="municipio_residencia" options={formData.departamento_residencia ? municipios[formData.departamento_residencia] : []} value={formData.municipio_residencia} onChange={handleChange} />
 
-        {/* Campos específicos por rol */}
-        {formData.rol === "Aprendiz" && <><label>Número de Ficha:</label><input type="text" name="numero_ficha" value={formData.numero_ficha} onChange={handleChange} required /></>}
+        
+        {formData.rol === "Aprendiz" && (
+          <>
+            <label>Número de Ficha:</label>
+            <input type="text" name="numero_ficha" value={formData.numero_ficha} onChange={handleChange} required />
+            
+            <label>Programa:</label>
+            <input type="text" name="programa" value={formData.programa} onChange={handleChange} required />
+          </>
+        )}
+        
+        
+        
         {formData.rol === "Instructor" && <><label>Tipo de Formación:</label><select name="tipo_formacion" value={formData.tipo_formacion} onChange={handleChange} required><option value="">Seleccione</option><option value="Tecnico">Técnico</option><option value="Transversal">Transversal</option></select></>}
 
         <Button text="Registrarse" type="submit" />

@@ -1,29 +1,128 @@
+
+/* Contenedor principal */
 .registro-container {
-    width: 50%;
-    margin: auto;
-    padding: 20px;
-    background-color: var(--background-dark);
-    border-radius: 10px;
-    box-shadow: 0px 0px 15px rgba(0, 255, 0, 0.2);
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #131a2a;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Título */
+.registro-container h2 {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 24px;
+  color: #28a745;
+}
+
+/* Formulario */
+.registro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Labels */
+.registro-form label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #d1d5db;
+}
+
+/* Inputs y selects */
+.registro-form input,
+.registro-form select {
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  color: #e5e7eb;
+  padding: 12px 14px;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.registro-form input:focus,
+.registro-form select:focus {
+  outline: none;
+  border-color: #28a745;
+  box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.4);
+}
+
+/* Botón primario */
+button[type="submit"] {
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+/* Botón alternativo */
+button.alt {
+  background-color: white;
+  color: #28a745;
+  border: 2px solid #28a745;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.alt:hover {
+  background-color: #e6f4ea;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .registro-container {
+    padding: 25px 20px;
   }
-  
-  .registro-form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .registro-form label {
-    color: var(--text-light);
-    margin-bottom: 5px;
-  }
-  
+
   .registro-form input,
   .registro-form select {
-    background-color: var(--background-light);
-    color: var(--text-dark);
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid var(--border-light);
-    margin-bottom: 10px;
+    font-size: 14px;
   }
-  
+}
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+/* Etiqueta */
+.form-group label {
+  margin-bottom: 6px;
+  color: #e0e0e0;
+  font-size: 15px;
+}
+
+/* Select estilizado */
+.form-group select {
+  background-color: #21293a;
+  color: #ffffff;
+  border: 1px solid #2e3b55;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: #2ecc71;
+  box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.3);
+}
